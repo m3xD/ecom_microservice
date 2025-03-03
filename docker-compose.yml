@@ -41,6 +41,8 @@ services:
       - RABBITMQ_HOST=rabbitmq
     volumes:
       - user-static:/app/static
+    ports:
+        - "8090:8000"
     networks:
       - ecommerce-network
     restart: always

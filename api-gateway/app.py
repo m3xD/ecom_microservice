@@ -39,7 +39,7 @@ async def proxy_request(service: str, path: str, request: Request):
     if service not in service_map:
         return {"error": "Service not found"}
 
-    target_url = f"{service_map[service]}/{path}"
+    target_url = f"{service_map[service]}/{service}/{path}"
 
     # Get the request body if any
     body = await request.body()
