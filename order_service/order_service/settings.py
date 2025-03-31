@@ -22,9 +22,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'orders',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  # Thêm dòng này ở đây (đầu danh sách)
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -95,13 +97,48 @@ REST_FRAMEWORK = {
 }
 
 # Service URLs
-PRODUCT_SERVICE_URL = os.getenv('PRODUCT_SERVICE_URL', 'http://product-service:8000')
-USER_SERVICE_URL = os.getenv('USER_SERVICE_URL', 'http://user-service:8000')
-CART_SERVICE_URL = os.getenv('CART_SERVICE_URL', 'http://cart-service:8000')
-PAYMENT_SERVICE_URL = os.getenv('PAYMENT_SERVICE_URL', 'http://payment-service:8000')
+PRODUCT_SERVICE_URL = os.getenv('PRODUCT_SERVICE_URL', 'http://ecom-product-service:8000')
+USER_SERVICE_URL = os.getenv('USER_SERVICE_URL', 'http://ecom-user-service:8000')
+CART_SERVICE_URL = os.getenv('CART_SERVICE_URL', 'http://ecom-cart-service:8000')
+PAYMENT_SERVICE_URL = os.getenv('PAYMENT_SERVICE_URL', 'http://ecom-payment-service:8000')
 
 # RabbitMQ settings
 RABBITMQ_HOST = os.getenv('RABBITMQ_HOST', 'rabbitmq')
 RABBITMQ_PORT = int(os.getenv('RABBITMQ_PORT', '5672'))
 RABBITMQ_USER = os.getenv('RABBITMQ_USER', 'guest')
 RABBITMQ_PASS = os.getenv('RABBITMQ_PASS', 'guest')
+
+# Cấu hình CORS
+CORS_ALLOW_ALL_ORIGINS = True  # Cho phép tất cả các nguồn gốc (chỉ sử dụng trong môi trường phát triển)
+
+# Hoặc cấu hình cụ thể những nguồn được phép:
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:3000",
+#     "http://127.0.0.1:3000",
+# ]
+
+# Cho phép cookies trong các request CORS
+CORS_ALLOW_CREDENTIALS = True
+
+# Cho phép các HTTP methods
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+]
+
+# Cho phép các headers
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+]

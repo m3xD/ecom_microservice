@@ -21,10 +21,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'corsheaders',
     'products',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  # Thêm dòng này ở đây (đầu danh sách)
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -98,3 +100,38 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # Media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Cấu hình CORS
+CORS_ALLOW_ALL_ORIGINS = True  # Cho phép tất cả các nguồn gốc (chỉ sử dụng trong môi trường phát triển)
+
+# Hoặc cấu hình cụ thể những nguồn được phép:
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:3000",
+#     "http://127.0.0.1:3000",
+# ]
+
+# Cho phép cookies trong các request CORS
+CORS_ALLOW_CREDENTIALS = True
+
+# Cho phép các HTTP methods
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+]
+
+# Cho phép các headers
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+]

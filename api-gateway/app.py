@@ -13,7 +13,7 @@ app.add_middleware(
     allow_methods=["*"],  # Cho phép tất cả methods
     allow_headers=["*"],  # Cho phép tất cả headers
 )
-
+# d1084638881b
 USER_SERVICE = os.getenv("USER_SERVICE_URL", "http://user-service:8000")
 PRODUCT_SERVICE = os.getenv("PRODUCT_SERVICE_URL", "http://product-service:8000")
 CART_SERVICE = os.getenv("CART_SERVICE_URL", "http://cart-service:8000")
